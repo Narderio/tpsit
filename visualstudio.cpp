@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#define DIM 20
+#define DIM 10
 
 using namespace std;
 const string DATABASE= "serie_a.dat";int n=0;
