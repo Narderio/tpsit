@@ -2,6 +2,7 @@
 #include <fstream>
 #define DIM 15
 
+
 using namespace std;
 const string DATABASE= "serie_a.dat";int n=0;
 
