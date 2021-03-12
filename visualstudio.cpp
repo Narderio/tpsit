@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#define DIM 15
+#define DIM 5
 
 
 using namespace std;
