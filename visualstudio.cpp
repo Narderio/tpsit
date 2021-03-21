@@ -66,27 +66,15 @@ miofile.close();//chiusura file
 }
 
 void classifica()
-{string tempstring;int tempint;
+{ Squadra temp;
 
      for(int j=0; j<=n; j++)
          for(int k=j+1 ; k<n; k++)
             if(squadre[j].punti<squadre[k].punti)
             {
-                tempint=squadre[j].punti;
-                squadre[j].punti=squadre[k].punti;
-                squadre[k].punti=tempint;
-
-                tempstring=squadre[j].nome;
-                squadre[j].nome=squadre[k].nome;
-                squadre[k].nome=tempstring;
-
-                tempint=squadre[j].gol;
-                squadre[j].gol=squadre[k].gol;
-                squadre[k].gol=tempint;
-
-                tempstring=squadre[j].capocannoniere;
-                squadre[j].capocannoniere=squadre[k].capocannoniere;
-                squadre[k].capocannoniere=tempstring;
+                temp= squadre[j];
+                squadre[j]=squadre[k];
+                squadre[k]=temp;
             }
 cout<<"\t\t CLASSIFICA SERIE A"<<endl;
 
@@ -98,27 +86,15 @@ cout<<"\t\t CLASSIFICA SERIE A"<<endl;
 }
 
 void capocannonieri()
-{string tempstring;int tempint;
+{ Squadra temp;
 
      for(int j=0; j<=n; j++)
          for(int k=j+1 ; k<n; k++)
             if(squadre[j].gol<squadre[k].gol)
             {
-                tempint=squadre[j].punti;
-                squadre[j].punti=squadre[k].punti;
-                squadre[k].punti=tempint;
-
-                tempstring=squadre[j].nome;
-                squadre[j].nome=squadre[k].nome;
-                squadre[k].nome=tempstring;
-
-                tempint=squadre[j].gol;
-                squadre[j].gol=squadre[k].gol;
-                squadre[k].gol=tempint;
-
-                tempstring=squadre[j].capocannoniere;
-                squadre[j].capocannoniere=squadre[k].capocannoniere;
-                squadre[k].capocannoniere=tempstring;
+                temp=squadre[j];
+                squadre[j]=squadre[k];
+                squadre[k]=temp;
             }
 cout<<"\t\t CLASSIFICA MARCATORI SERIE A"<<endl;
                 for(int a=0;a<n;a++)
