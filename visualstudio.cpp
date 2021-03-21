@@ -12,6 +12,7 @@ struct Squadra
     int punti;
     string capocannoniere;
     int gol;
+    int codice;
 }squadre[DIM];
 
 
@@ -25,6 +26,9 @@ void input()
 
     do{
         fflush(stdin);//pulisco ram
+        cout<<"Inserisci il codice della squadra:";
+        cin>> squadre[n].codice;
+        fflush(stdin);
         cout << "Inserisci squadra:";
        getline(cin,squadre[n].nome);//inserimento nome squadra
        cout << "Inserisci punti:";
@@ -149,6 +153,32 @@ int a=0;
     fflush(stdin);
 }
 
+void ricerca()
+{
+    int cod;long cont;int scelta;
+
+    fstream miofile;
+    miofile.open(DATABASE.c_str(),ios::in | ios::binary);
+    if(!miofile)
+        cout<<"Errore nell'apertura del file";
+
+    else{
+        cout<<"Inserisci il codice da cercare:";
+        cin>>cod;
+        cont=(cod-1)*(sizeof(squadre));
+        miofile.seekg(cont);
+        miofile.read((char*)&squadre,sizeof(squadre));
+        cout<<"Nome:"<<squadre[cont].nome<<endl<<"Punti:"<<squadre[cont].punti<<endl<<"Capocannoniere:"
+        <<squadre[cont].capocannoniere<<endl<<"Gol:"<<squadre[cont].gol<<endl<<endl;
+       /* cout<<"\n\n Vuoi modificare il record?(0=no/1=si)"<<endl;
+        cin>>scelta;
+        if(scelta==1)*/
+
+
+    }
+
+}
+
 
 int main()
 {int scelta;
@@ -158,7 +188,8 @@ int main()
     cout << "2.Classifica squadre" << endl;
     cout << "3.Classifica marcatori" << endl;
     cout << "4.Leggi" << endl;
-    cout << "5.Esci" << endl;
+    cout << "5.Ricerca"<<endl;
+    cout << "6.Esci" << endl;
     cin>>scelta;
     switch(scelta)
     {
@@ -174,11 +205,14 @@ int main()
         case 4: lettura();
                     break;
 
-        case 5:cout << "Grazie di aver utilizzato questo programma!" << endl;
+        case 5: ricerca();
+                    break;
+
+        case 6:cout << "Grazie di aver utilizzato questo programma!" << endl;
                 break;
     }
 
-    }while(scelta!=5);
+    }while(scelta!=6);
     return 0;
 }
- <
+
