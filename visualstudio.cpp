@@ -8,9 +8,9 @@ const string DATABASE= "serie_a.dat";int n=0;
 
 struct Squadra
 {
-    string nome;
+    char nome[20];
     int punti;
-    string capocannoniere;
+    char capocannoniere[20];
     int gol;
     int codice;
 }squadre[DIM];
@@ -22,7 +22,7 @@ void input()
 {int a;
 
     fstream miofile;
-    miofile.open(DATABASE.c_str(),ios::app | ios::binary);//apro il file
+    miofile.open(DATABASE, ios::app | ios::binary);//apro il file
 
     do{
         fflush(stdin);//pulisco ram
@@ -30,12 +30,12 @@ void input()
         cin>> squadre[n].codice;
         fflush(stdin);
         cout << "Inserisci squadra:";
-       getline(cin,squadre[n].nome);//inserimento nome squadra
+       cin.getline(squadre[n].nome,20);//inserimento nome squadra
        cout << "Inserisci punti:";
        cin>>squadre[n].punti;//inserimento punti squadra
        fflush(stdin);//pulisco nuovamente ram
        cout << "Inserisci capocannoniere:";
-       getline(cin,squadre[n].capocannoniere);//inserimento nome capocannoniere squadra
+       cin.getline(squadre[n].capocannoniere,20);//inserimento nome capocannoniere squadra
        cout << "Inserisci numero goal:";
        cin>>squadre[n].gol;//inserimento gol del capocannoniere squadra
        n++;//aumento il contatore delle squadre presenti nel database
@@ -111,7 +111,7 @@ void lettura()
 int a=0;
 
     fstream miofile;
-    miofile.open(DATABASE.c_str(),ios::in | ios::binary);
+    miofile.open(DATABASE, ios::in | ios::binary);
     if(!miofile)
         cout<<"Errore nell'apertura del file";
     else
@@ -132,20 +132,23 @@ int a=0;
 void ricerca()
 {
     int cod;long cont;int scelta;
-
+    Squadra rice;
     fstream miofile;
-    miofile.open(DATABASE.c_str(),ios::in | ios::binary);
+    miofile.open(DATABASE,ios::in | ios::binary);
     if(!miofile)
         cout<<"Errore nell'apertura del file";
 
     else{
         cout<<"Inserisci il codice da cercare:";
         cin>>cod;
-        cont=(cod-1)*(sizeof(squadre));
+
+        cont=(cod-1)*(sizeof(rice));
         miofile.seekg(cont);
-        miofile.read((char*)&squadre,sizeof(squadre));
-        cout<<"Nome:"<<squadre[cont].nome<<endl<<"Punti:"<<squadre[cont].punti<<endl<<"Capocannoniere:"
-        <<squadre[cont].capocannoniere<<endl<<"Gol:"<<squadre[cont].gol<<endl<<endl;
+        miofile.read((char*)&rice,sizeof(rice));
+
+        cout<<"Nome:"<<rice.nome<<endl<<"Punti:"<<rice.punti<<endl<<"Capocannoniere:"
+        <<rice.capocannoniere<<endl<<"Gol:"<<rice.gol<<endl<<endl;
+        miofile.close();
        /* cout<<"\n\n Vuoi modificare il record?(0=no/1=si)"<<endl;
         cin>>scelta;
         if(scelta==1)*/
