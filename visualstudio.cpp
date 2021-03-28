@@ -179,9 +179,20 @@ void ricerca()
                             fflush(stdin);
                             cin>>rice.gol;
                                 break;
+
                 }
-            miofile.seekp(cont);
+                 miofile.seekp(cont);
             miofile.write((char*)&rice, sizeof(rice));
+
+            }
+
+            else
+            {
+                 miofile.seekp(cont);
+            miofile.write((char*)&rice, sizeof(rice));
+                cout<<"vuoi eliminare una squadra?(0=no/1=si)"<<endl;
+                cin>>scelta;
+                rice.nome[0]='\0';
             }
     }
 miofile.close();
