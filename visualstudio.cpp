@@ -13,7 +13,7 @@ struct Squadra
     char capocannoniere[20];
     int gol;
     int codice;
-}squadre[DIM];
+}squadre[DIM],lettur;
 
 
 
@@ -111,17 +111,20 @@ void lettura()
 int a=0;
 
     fstream miofile;
-    miofile.open(DATABASE, ios::in | ios::binary);
+    miofile.open(DATABASE, ios::in  | ios::binary);
     if(!miofile)
-        cout<<"Errore nell'apertura del file";
+        cout<<"Errore nell'apertura del file"<<endl;
     else
     {
      cout<<"\t\t\tSTAMPA DI TUTTE LE SQUADRE"<<endl;
-        while(miofile.read((char*)&squadre,sizeof(squadre)))
+        while(miofile.read((char*)&lettur,sizeof(lettur)))
         {
-            cout<<"Nome:"<<squadre[a].nome<<endl<<"Punti: "<<squadre[a].punti<<endl
-            <<"Capocannoniere: "<<squadre[a].capocannoniere<<endl<<"Gol: "<<squadre[a].gol<<endl;
-        a++;
+            if(lettur.nome[0]=='\0')
+                break;
+
+            cout<<"Nome:"<<lettur.nome<<endl<<"Punti: "<<lettur.punti<<endl
+            <<"Capocannoniere: "<<lettur.capocannoniere<<endl<<"Gol: "<<lettur.gol<<endl;
+
         }
 
     }
@@ -134,9 +137,9 @@ void ricerca()
     int cod;long cont;int scelta;
     Squadra rice;
     fstream miofile;
-    miofile.open(DATABASE,ios::in | ios::binary);
+    miofile.open(DATABASE,ios::in | ios::out | ios::binary);
     if(!miofile)
-        cout<<"Errore nell'apertura del file";
+        cout<<"Errore nell'apertura del file"<<endl;
 
     else{
         cout<<"Inserisci il codice da cercare:";
@@ -148,14 +151,40 @@ void ricerca()
 
         cout<<"Nome:"<<rice.nome<<endl<<"Punti:"<<rice.punti<<endl<<"Capocannoniere:"
         <<rice.capocannoniere<<endl<<"Gol:"<<rice.gol<<endl<<endl;
-        miofile.close();
-       /* cout<<"\n\n Vuoi modificare il record?(0=no/1=si)"<<endl;
+
+        cout<<"\n\n Vuoi modificare il record?(0=no/1=si)"<<endl;
         cin>>scelta;
-        if(scelta==1)*/
+        if(scelta==1)
+            {
+                cout<<"1.Nome \n2.Punti \n3.Capocannoniere \n4.Goal del capocannoniere"<<endl;
+                cin>>scelta;
+                switch(scelta)
+                {
+                    case 1: cout<<"Inserisci il nome modificato:";
+                            fflush(stdin);
+                            cin.getline(rice.nome,20);
+                                break;
 
+                    case 2:cout<<"Inserisci i punti modificati:";
+                            fflush(stdin);
+                            cin>>rice.punti;
+                                break;
 
+                    case 3:cout<<"Inserisci il nome del capocannoniere modificato:";
+                            fflush(stdin);
+                            cin.getline(rice.capocannoniere,20);
+                                break;
+
+                    case 4:cout<<"Inserisci il nome modificato:";
+                            fflush(stdin);
+                            cin>>rice.gol;
+                                break;
+                }
+            miofile.seekp(cont);
+            miofile.write((char*)&rice, sizeof(rice));
+            }
     }
-
+miofile.close();
 }
 
 
