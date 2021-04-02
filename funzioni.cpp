@@ -1,33 +1,34 @@
 #include <iostream>
+#include <stdio.h>
+#include <string>
+#include <stdlib.h>
 #include <fstream>
 #define DIM 200
 #include "funzioni.hpp"
 
 
+
 using namespace std;
 
- /*! \mainpage <CENTER> Gestione di una rubrica </CENTER>
-    * \author <B> Narderio</B>
-    * \version <B> V1.0 </B>
-    * \date <B> Consegna progetto:   ti voglio bene 3000 </B>
-    *
-    * \section caratteristiche CARATTERISTICHE DEL PROGETTO
-    *
-    *  Il software permette di:
-    * - prendere da input i contatti e inserirli in un file
-    * - genera un file di testo denominato rubrica.dat
-    * - leggere i contatti memorizzati nel file
-    * - ricercare un contatto attraverso il codice
-    * - modificare un contatto
-    *
-    *\section UML DIAGRAMMA UML DEL PROGETTO
-    * <IMG SRC = "uml.jpg" ALT = "Diagramma UML del progetto"/>
-    *
-    *\section CLASS DIAGRAMMA DELLE CLASSI PRESENTI NEL PROGETTO
-    *<IMG SRC = "classi.jpg" ALT = "Diagramma delle classi del progetto"/>
-    */
+const string DATABASE= "rubrica.dat";int n=0;
 
-/*void input()
+struct Rubrica
+{
+    char nome[20];
+    char cognome[20];
+    int numero;
+    int codice;
+}contatti[DIM],lettur;
+
+//! \class [FUNZIONI]
+
+//! \relates FUNZIONI
+
+/*! \fn input()
+    \brief permette di inserire un contatto da input e lo scrive nel file
+*/
+
+void input()
 {int a;
 
     fstream miofile;
@@ -75,12 +76,15 @@ using namespace std;
 
 miofile.close();
 
-}*/
+}
 
 
+//! \relates FUNZIONI
+/*! \fn lettura()
+    \brief legge i contatti memorizzati
+*/
 
-
-/*void lettura()
+void lettura()
 {
     string stringa;
 int a=0;
@@ -105,13 +109,16 @@ int a=0;
     }
     miofile.close();
     fflush(stdin);
-}*/
+}
 
 
 
+//! \relates FUNZIONI
+/*! \fn ricerca()
+    \brief ricerca un contatto con possibilità di modificarlo
+*/
 
-
-/*void ricerca()
+void ricerca()
 {
     int cod;long cont;int scelta;
     Rubrica rice;
@@ -170,40 +177,3 @@ int a=0;
     }
 miofile.close();
 }
-
-*/
-
-
-int main()
-{
-    //! \brief main nel quale tutto accade
-
-    int scelta;
-
-
-    do{
-    cout << "1.Inserisci contatti" << endl;
-    cout << "2.Leggi" << endl;
-    cout << "3.Ricerca"<<endl;
-    cout << "4.Esci" << endl;
-    cin>>scelta;
-
-    switch(scelta)
-    {
-        case 1: {input();
-                    break;}
-
-        case 2: {lettura();
-                    break;}
-
-        case 3: {ricerca();
-                    break;}
-
-        case 4: {cout << "Grazie di aver utilizzato questo programma!" << endl;
-                break;}
-    }
-
-    }while(scelta!=4);
-    return 0;
-}
-
